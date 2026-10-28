@@ -1,3 +1,4 @@
 .env
+klucz.env
 __pycache__/
 *.pyc
