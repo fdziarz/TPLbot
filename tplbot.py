@@ -433,7 +433,7 @@ async def on_message(message):
         await dodaj_punkty(message.author, monetawynik)
 
 
-    if message.author.id == 960975516779806730:
+    if message.author.id == 960975516779806730 or message.author.id == 1100884416877834383:
         if text.startswith('!detimeout'):
             if message.mentions:                                                                    #usuwanie timeouta
                 osoba = message.mentions[0]
