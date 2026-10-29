@@ -1,12 +1,17 @@
-import discord, json, random
+import discord, json, random, os
 from discord.ext import commands
 from datetime import timedelta
+from dotenv import load_dotenv
+
+load_dotenv('klucz.env')
+print('działa klucz')
 
 intents = discord.Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+#id kanałów
 
 kanal_terrariaczat = 591240468998914052
 kanal_terrariamody =591240488145649694
@@ -19,12 +24,15 @@ kanal_bot = 591666865848320032
 kanal_ankietyrebirth = 1528694290761519216
 kanal_bazgroly = 736244684866846762
 
+#jakiś syf
+
 krysti_variable = 1
 ilepast = 0
 wujekkujek = 'A jakoćci wspominałem już niegdyś, świętej pamięci mój wujaszek był mąż zacny, lecz surowy wielce. Jam zaś ledwie pacholę był, może lat pięć, może i sześć miałem - któż by to dziś zliczył! Młodziuchny tedy byłem, a wuj u babki naszej w gościnie siedział. I rzekłem żartem, podkreślam — dla żartu jeno!, rym taki mi się w głowie uroił: „Wujek - Kujek!” - rzecze ma niewinna dusza, przez „k”, przez „k”, bom sobie rym taki upodobał. Lecz ledwie słowo z ust mych wypadło, wujaszek srogo na mię spojrzał, a wnet, nie mówiąc ni słowa, liścia takiego mi zdzielił w pysk, że aż echo po izbie się rozniosło! I od onych czasów, powiadam wam, żadnego już żartu z wujem nie śmiałem czynić. '
 brus = 'Miaem problemy z pornografią. Byem mocno uzależniony i szukaem mocniejszych wrażeń. Stąd wszedłem na tą na taką stronę. Przeklikaem do ósmej strony, bo nic mi nie odpowiadało... Szukaem po prostu mocniejszych wrażeń. 😈😈😈'
 cobyszrobil = 'Czysto teoretycznie, załóżmy, załóżmy czysto teoretycznie, że jesteś prezydentem Chujolandii. Chujolandia zajmuje powiedzmy 30% naszego globu. Twoja Chujolandia jest mocarstwem, nuklearnym, atomowym, jakimkolwiek. Jest bardzo potężna militarnie i w ogóle, prawda? I w pewnym momencie przylatuje Ci jakiś przedstawiciel kurwa, Cipkolandii drugiej planety Cipkolandii i mówi ci tak! Słuchaj... ziomie z Chujolandii, albo się dogadujemy i przylatuje do ciebie co tydzień i przygotowywujesz mi tutaj 10 mężczyzn, 10 kobiet, to, tam, tam, toto, albo wracam na mój statek i odpalam kurwa moje międzygalaktyczne działo w twoją pierdoloną planetę. Co byś zrobił, co byś zrobił... w takim przypadku? '
 ostatnie = {}
+
 
 ankiety_czlon1 = [
     "Najlepszy",
@@ -33,7 +41,7 @@ ankiety_czlon1 = [
     "Najbardziej underrated",
     "Najbardziej overrated"
 ]
-
+                                                # unused rzeczy do ankiet, może kiedyś użyję
 ankiety_czlon2 = [
     "miecz",
     "łuk",
@@ -77,7 +85,7 @@ gamba = [
         ('-0,1 punkta karnego', 22, -0.1),
         ('+1 punkt karny ez', 8, 1),
         ('-1 punkt karny, masz farta', 8, -1),
-        ('mute', 0.5, 'mute'),                        #mute 1h
+        ('mute', 0.5, 'mute'),                        #  <-  mute 1h                                      #outputy gamby (2. kolumna to szansa w %)
         ('+1 strajk es', 0.1, 5),
         #syf
         (brus, 0.75, 0),
@@ -111,14 +119,11 @@ except FileNotFoundError:
 #------------------------------------------------------------------------
 
 odpowiedzi = {
-    "krysti ": "dziwka",
-    #"fdziarz": "legenda",
     'barry': 'spoczywaj w pokoju',
     "obalić": "pełna zgoda",
     "fandom": "jebać fandom",
-    "#freebarry": "#freebarry",
     "belka": "belka ten temat",
-    'doa': 'neem',
+    'doa': 'neem',                                  # bot wychwytuje te słowa w zdaniu, po czym ma 1/3 szans na odpowiedź
     'mute': 'permanentny najlepiej',
     "kurw": "nie przeklinajcie",
     "pierd": "nie przeklinajcie",
@@ -133,7 +138,7 @@ odpowiedzi_kanal = {
         **odp_szukam,
     },
     kanal_terrariamody: odp_szukam,
-    kanal_terrariabudowle: odp_szukam,
+    kanal_terrariabudowle: odp_szukam,              # keywordy zależne od kanału, variablesy wyżej
     kanal_luzne: {
         'offtop': 'luźno',
         'luźno': 'ustalone że luźno',
@@ -156,7 +161,7 @@ xodpowiedzi = {
     "działa?": "działa",
     "czar": "nuch",
     'dupa': 'i kamieni kupa',
-    'tata jest cola': 'to se weź',
+    'tata jest cola': 'to se weź',                                                    # bot odpowie tylko wtedy, gdy wysłana wiadomość będzie dokładnie taka (nie ma znaczenia czy wielkie czy małe litery tho)
     'rozmowa chuja z butem': 'rel',
     'sad': 'jabłkowy',
     "!pomoc": "https://terraria-pl-lore.fandom.com/pl/wiki/TPLbot",
@@ -165,7 +170,6 @@ xodpowiedzi = {
     '!setupy': 'https://terraria.wiki.gg/wiki/Guide:Class_setups',
     "!ankieta": f"zapraszam na <#{kanal_ankietyrebirth}>",
     "!porno": "niestety nie ma tu takiej komendy",
-    '!zbanuj barry': 'banuję użytkownika barry',
     "!tplwiki": "https://terraria-pl-lore.fandom.com/pl/wiki/Terraria_PL_Lore_Wiki",
     'https://cdn.discordapp.com/attachments/591229124950097955/1541513360061898792/ezgif.com-gif-maker.gif': 'rel',
 }
@@ -187,12 +191,8 @@ reakcje = {
 zdjęcia = {
     '!potion': 'python rzeczy/qrsyf/potiony.png',
     '!shimmer': 'python rzeczy/qrsyf/shimmer.jpg',
-    #'!krysti': f'python rzeczy/krysti/{krysti_variable}.png'
 }
 
-losowe = {
-    
-}
 
 async def dodaj_punkty(member, punkty):
     user_id = member.id
@@ -210,7 +210,7 @@ async def dodaj_punkty(member, punkty):
     strajki[user_id]["punkty"] += punkty
 
 
-    if strajki[user_id]["punkty"] >= 5:                                                                 #strajki i muty
+    if strajki[user_id]["punkty"] >= 5:                                                                 #funkcja dodająca punkty karne & strajki
 
         strajki[user_id]["punkty"] = 0
         strajki[user_id]["strajki"] += 1
@@ -246,7 +246,7 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    if message.channel.id == 1538268811537678426:                                                         #pułapka na boty
+    if message.channel.id == 1538268811537678426:                                                         #pułapka na boty (24h muta)
         user = message.author
         await user.timeout(
                     timedelta(hours=24),
@@ -271,7 +271,7 @@ async def on_message(message):
 
         ostatnie[channel_id].append(user_id)
 
-        ostatnie[channel_id] = ostatnie[channel_id][-6:]                                          #flood
+        ostatnie[channel_id] = ostatnie[channel_id][-6:]                                          #flood (6 wiadomości pod rząd -> ostrzeżenie i znowu liczy)
 
         if len(ostatnie[channel_id]) == 6:
 
@@ -285,6 +285,8 @@ async def on_message(message):
                 )
 
                 ostatnie[channel_id] = []
+
+
 
     liczba = 0
 
@@ -306,6 +308,7 @@ async def on_message(message):
             message.author,
             liczba * 0.1
         )
+
 
 
 
@@ -377,7 +380,7 @@ async def on_message(message):
         if ilepast == 0 or ilepast == message.guild.member_count:
             await message.channel.send(f'na tpl jest {message.guild.member_count} osób')
         elif ilepast > message.guild.member_count:
-            await message.channel.send(f'jest {message.guild.member_count}, ostatnio było {ilepast}, przykra sprawa')           #!ile osób
+            await message.channel.send(f'jest {message.guild.member_count}, ostatnio było {ilepast}, przykra sprawa')           #!ile osób (może usunę)
         else:
             await message.channel.send(f'jest {message.guild.member_count}, ostatnio było {ilepast}, fifka')
         ilepast = message.guild.member_count
@@ -444,9 +447,9 @@ async def on_message(message):
         tytuł = czlon1 + ' ' + czlon2
 
         ankieta = discord.Poll(question=tytuł, duration=timedelta(hours=1), multiple=False)
-        ankieta.add_answer(text='dupa')
-        ankieta.add_answer(text='sex')
-                                                                                                        #ankeity
+        ankieta.add_answer(text='a')
+        ankieta.add_answer(text='b')
+                                                                                                        # unused ankeity
         await message.channel.send(poll=ankieta)
         return
 
@@ -508,4 +511,4 @@ async def on_message(message):
     
 
 
-bot.run("MTU0MTA3NTE5MjMyMTgwNjQxNg.G_P5PF.HNyuhMqrBXWvhosmcu7r3RIEaO9znRXsrE6Z2s")
+bot.run(os.getenv("token"))
