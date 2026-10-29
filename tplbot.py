@@ -7,7 +7,6 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-#user_id = 0
 
 kanal_terrariaczat = 591240468998914052
 kanal_terrariamody =591240488145649694
