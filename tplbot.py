@@ -243,7 +243,7 @@ async def on_ready():
 async def on_message(message):
     global krysti_variable, ilepast
 
-    if message.author.bot:
+    if message.author.bot or message.guild.id != 591215399245447178:
         return
 
     if message.channel.id == 1538268811537678426:                                                         #pułapka na boty (24h muta)
