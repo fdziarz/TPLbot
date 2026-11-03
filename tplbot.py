@@ -91,7 +91,7 @@ gamba = [
         (brus, 0.75, 0),
         ('gówno', 1, 0),
         (wujekkujek, 0.9, 0),
-        (cobyszrobil, 0.75)
+        (cobyszrobil, 0.75, 0)
     ]
 
 #------------------------------------------------------------------------
@@ -203,11 +203,11 @@ async def dodaj_punkty(member, punkty):
             "strajki": 0
         }
 
-    if strajki[user_id]["punkty"] < 0:
-             strajki[user_id]["punkty"] = 0
-
-
     strajki[user_id]["punkty"] += punkty
+    print(f'{member.display_name} ma {punkty} punktów')
+
+    if strajki[user_id]["punkty"] < 0:
+        strajki[user_id]["punkty"] = 0
 
 
     if strajki[user_id]["punkty"] >= 5:                                                                 #funkcja dodająca punkty karne & strajki
@@ -218,6 +218,8 @@ async def dodaj_punkty(member, punkty):
         numer_strajka = strajki[user_id]["strajki"]
 
         czas = 2 ** (numer_strajka - 1)
+
+        print(f'{member.display_name} dostał muta')
 
         await member.timeout(
             timedelta(hours=min(672, czas)),
