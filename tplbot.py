@@ -204,7 +204,7 @@ async def dodaj_punkty(member, punkty):
         }
 
     strajki[user_id]["punkty"] += punkty
-    print(f'{member.display_name} ma {punkty} punktów')
+    print(f'{member.display_name} ma {strajki[user_id]["punkty"]} punktów')
 
     if strajki[user_id]["punkty"] < 0:
         strajki[user_id]["punkty"] = 0
