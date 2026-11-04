@@ -81,7 +81,7 @@ odp_mody = {
 
 gamba = [
         ('nic', 36, 0),
-        ('+0,1 punkta karnego', 22, 0.1,),
+        ('+0,1 punkta karnego', 22, 0.1),
         ('-0,1 punkta karnego', 22, -0.1),
         ('+1 punkt karny ez', 8, 1),
         ('-1 punkt karny, masz farta', 8, -1),
@@ -93,6 +93,14 @@ gamba = [
         (wujekkujek, 0.9, 0),
         (cobyszrobil, 0.75, 0)
     ]
+
+gambatroll = [
+        ('nic', 8, 0),
+        ('+0,1 punkta karnego', 30, 0.1),
+        ('-0,1 punkta karnego', 4, -0.1),
+        ('+1 punkt karny ez', 57, 1),
+        ('-1 punkt karny, masz farta', 1, -1)
+]
 
 #------------------------------------------------------------------------
 
@@ -389,11 +397,18 @@ async def on_message(message):
         return
 
     if text == '!gamba':
-        wynik = random.choices(
-            gamba,
-            weights=[x[1] for x in gamba],
-            k=1
-        )[0]
+        if message.channel.id == kanal_bot:
+            wynik = random.choices(
+                gamba,
+                weights=[x[1] for x in gamba],
+                k=1
+            )[0]
+        else:
+            wynik = random.choices(
+                gambatroll,
+                weights=[x[1] for x in gambatroll],
+                k=1
+            )[0]
                                                                                                                 #!gamba
         nazwa, waga, punkty = wynik
 
@@ -409,28 +424,39 @@ async def on_message(message):
         return
 
     if text == '!gamba5':
-        for i in range(5):
-            wynik = random.choices(
-                gamba,
-                weights=[x[1] for x in gamba],
-                k=1
-            )[0]
-                                                                                                                    #!gamba5
-            nazwa, waga, punkty = wynik
+        if message.channel.id == kanal_bot:
+            for i in range(5):
+                wynik = random.choices(
+                    gamba,
+                    weights=[x[1] for x in gamba],
+                    k=1
+                )[0]
+        else:
+            for i in range(5):
+                wynik = random.choices(
+                    gambatroll,
+                    weights=[x[1] for x in gambatroll],
+                    k=1
+                )[0]
+                                                                                                                        #!gamba5
+                nazwa, waga, punkty = wynik
 
-            await message.channel.send(nazwa)
+                await message.channel.send(nazwa)
 
-            if isinstance(punkty, (int, float)):
-                if punkty != 0:
-                    await dodaj_punkty(message.author, punkty)
-            else:
-                if punkty == 'mute':
-                    await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
+                if isinstance(punkty, (int, float)):
+                    if punkty != 0:
+                        await dodaj_punkty(message.author, punkty)
+                else:
+                    if punkty == 'mute':
+                        await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
 
         return
 
     if text == '!moneta':
-        monetawynik = random.choice([1,-1])
+        if message.channel.id == kanal_bot:
+            monetawynik = random.choice([1,-1])
+        else:
+            monetawynik = 1
         await message.channel.send(f'wypada {monetawynik} punkt!')                                                   #moneta
         await dodaj_punkty(message.author, monetawynik)
 
