@@ -439,16 +439,16 @@ async def on_message(message):
                     k=1
                 )[0]
                                                                                                                         #!gamba5
-                nazwa, waga, punkty = wynik
+        nazwa, waga, punkty = wynik
 
-                await message.channel.send(nazwa)
+        await message.channel.send(nazwa)
 
-                if isinstance(punkty, (int, float)):
-                    if punkty != 0:
-                        await dodaj_punkty(message.author, punkty)
-                else:
-                    if punkty == 'mute':
-                        await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
+        if isinstance(punkty, (int, float)):
+            if punkty != 0:
+                await dodaj_punkty(message.author, punkty)
+        else:
+            if punkty == 'mute':
+                await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
 
         return
 
