@@ -403,6 +403,19 @@ async def on_message(message):
                 weights=[x[1] for x in gamba],
                 k=1
             )[0]
+
+            nazwa, waga, punkty = wynik
+            
+            await message.channel.send(nazwa)
+    
+            if isinstance(punkty, (int, float)):
+                if punkty != 0:
+                    await dodaj_punkty(message.author, punkty)
+            else:
+                if punkty == 'mute':
+                    await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
+    
+        
         else:
             wynik = random.choices(
                 gambatroll,
@@ -410,16 +423,16 @@ async def on_message(message):
                 k=1
             )[0]
                                                                                                                 #!gamba
-        nazwa, waga, punkty = wynik
+            nazwa, waga, punkty = wynik
 
-        await message.channel.send(nazwa)
+            await message.channel.send(nazwa)
 
-        if isinstance(punkty, (int, float)):
-            if punkty != 0:
-                await dodaj_punkty(message.author, punkty)
-        else:
-            if punkty == 'mute':
-                await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
+            if isinstance(punkty, (int, float)):
+                if punkty != 0:
+                    await dodaj_punkty(message.author, punkty)
+            else:
+                if punkty == 'mute':
+                    await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
 
         return
 
@@ -431,6 +444,17 @@ async def on_message(message):
                     weights=[x[1] for x in gamba],
                     k=1
                 )[0]
+                nazwa, waga, punkty = wynik
+                
+                await message.channel.send(nazwa)
+        
+                if isinstance(punkty, (int, float)):
+                    if punkty != 0:
+                        await dodaj_punkty(message.author, punkty)
+                else:
+                    if punkty == 'mute':
+                        await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
+
         else:
             for i in range(5):
                 wynik = random.choices(
@@ -439,16 +463,16 @@ async def on_message(message):
                     k=1
                 )[0]
                                                                                                                         #!gamba5
-        nazwa, waga, punkty = wynik
+                nazwa, waga, punkty = wynik
 
-        await message.channel.send(nazwa)
+                await message.channel.send(nazwa)
 
-        if isinstance(punkty, (int, float)):
-            if punkty != 0:
-                await dodaj_punkty(message.author, punkty)
-        else:
-            if punkty == 'mute':
-                await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
+                if isinstance(punkty, (int, float)):
+                    if punkty != 0:
+                        await dodaj_punkty(message.author, punkty)
+                else:
+                    if punkty == 'mute':
+                        await message.author.timeout(timedelta(hours=1), reason=f"spoczywaj w sikach")
 
         return
 
