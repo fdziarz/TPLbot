@@ -178,6 +178,7 @@ xodpowiedzi = {
     '!setupy': 'https://terraria.wiki.gg/wiki/Guide:Class_setups',
     "!ankieta": f"zapraszam na <#{kanal_ankietyrebirth}>",
     "!porno": "niestety nie ma tu takiej komendy",
+    '!otwieram': 'otwieram jebalnie',
     "!tplwiki": "https://terraria-pl-lore.fandom.com/pl/wiki/Terraria_PL_Lore_Wiki",
     'https://cdn.discordapp.com/attachments/591229124950097955/1541513360061898792/ezgif.com-gif-maker.gif': 'rel',
 }
